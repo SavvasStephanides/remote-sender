@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  messagequeue:
+    image: rabbitmq:3
+    hostname: messagequeue
+    ports:
+      - "5672:5672"
+    restart: always
+
+  sender:
+    build: ./containers/sender/.
+    volumes:
+      - ./containers/sender/content:/root
+    restart: always
+    ports:
+      - "5000:5000"
